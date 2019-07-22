@@ -31,6 +31,7 @@ build/
 .vscode/
 
 src/main/frontend/dist/**
+src/main/frontend/styles/dist/**
 src/main/frontend/node/**
 src/main/frontend/node_modules/**
 src/main/frontend/styles/node_modules/**
