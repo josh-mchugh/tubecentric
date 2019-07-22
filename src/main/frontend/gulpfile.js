@@ -34,7 +34,6 @@ gulp.task('build:resources:install:node', function() {
 gulp.task('build:resources', function() {
 
     return gulp.src('./styles')
-        .pipe(exec('cd styles && ls'))
         .pipe(exec('cd styles && npm run build'));
 });
 
@@ -135,12 +134,10 @@ gulp.task('build:aps:videoMetaBuilderApp:prod', gulp.series(
     'copy:apps:videoMetaBuilderApp:js'
 ));
 
-
 /*
 * Build All
 */
 gulp.task('build:all:prod', gulp.series(
     'clean:dist',
-    'build:resources:prod',
-    'build:aps:videoMetaBuilderApp:prod'
+    'build:resources:prod'
 ));

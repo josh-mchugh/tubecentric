@@ -163,15 +163,6 @@
             </div>
         </section>
 
-        <div id="helloworld"></div>
-
-        <hello-world></hello-world>
-
-        <script th:href="@{/resources/videoMetaBuilderApp/main-es2015.js}"></script>
-        <script th:href="@{/resources/videoMetaBuilderApp/polyfills-es2015.js}"></script>
-        <script th:href="@{/resources/videoMetaBuilderApp/runtime-es2015.js}"></script>
-        <script th:href="@{/resources/videoMetaBuilderApp/scripts.js}"></script>
-
         <!-- Footer -->
         <footer class="footer bg-light">
             <div class="container">
@@ -220,11 +211,6 @@
         </footer>
     </div>
     <script>
-        (function() {
-            var helloWorldElement = document.createElement('hello-world');
-            var helloWorldContainer = document.getElementById('helloworld');
-            helloWorldContainer.appendChild(helloWorldElement);
-        })()
     </script>
     </body>
 </html>
