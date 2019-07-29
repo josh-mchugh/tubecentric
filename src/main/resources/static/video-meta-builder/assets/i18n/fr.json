@@ -1,0 +1,75 @@
+{
+  "actions": {
+      "copy.to.clipboard": "Copier dans le presse-papier",
+      "edit": "modifier",
+      "expand": "Développer",
+      "hide": "Cacher",
+      "hightlight.all": "Mettez tout en évidence",
+      "more.videos": "Plus de vidéos",
+      "previous.videos": "Vidéos précédentes",
+      "next.step": "L'étape suivante",
+      "previous.step": "Étape précédente",
+      "remove.all": "Enlever tout",
+      "submit": "Soumettre"
+  },
+  "video": {
+      "description": "La description",
+      "tags": "Mots clés",
+      "title" : "Titre",
+      "views": "vues"
+  },
+  "steps": {
+      "copy": "Copie",
+      "search.tags": "Balises de recherche",
+      "title.description" : "Description / titre"
+  },
+  "errors": {
+      "description.length.error": "La description dépasse la limite de {{value}} caractères.",
+      "general.length.error": "Dépasse {{value}} la limite de caractères",
+      "general.length.warning": "Dépasse le caractère recommandé {{value}}",
+      "title.length.warning": "Le titre dépasse la limite recommandée de {{value}} caractères.",
+      "title.length.error": "Le titre dépasse la limite de {{value}} caractères.",
+      "tags.length.error": "Les balises dépassent la limite de {{valeur}} caractères."
+  },
+  "general": {
+      "copyright": "droits d'auteur",
+      "language": "La langue"
+  },
+  "content": {
+      "instruction.title": "Simplifiez votre processus de création vidéo",
+      "instruction.search": "Rechercher des vidéos",
+      "instruction.tag": "Sélectionnez les balises associées",
+      "instruction.enter": "Entrez le titre et la description",
+      "instruction.visualize": "Visualiser le placement des balises",
+      "instruction.copy": "Copie: Tags, Titre, Description",
+      "instructions.add.tags": "Saisie ou recherche de balises",
+      "tags.in.title": "Pourcentage de tags dans Title:",
+      "tags.in.description": "Tag utilisé dans Description:",
+      "total.tags.used": "Nombre total de tags utilisés:"
+  },
+  "feedback": {
+    "title": "Laisser des commentaires",
+    "message": "Dites-nous ce que vous en pensez. N'hésitez pas à laisser des suggestions et des recommandations. Nous voulons vous aider en simplifiant votre processus de création de contenu."
+  },
+  "labels": {
+      "enter.description": "Entrez votre description de la vidéo",
+      "enter.tags" : "Entrez les balises",
+      "enter.title": "Entrez le titre de la vidéo",
+      "search.youtube": "Rechercher sur YouTube"
+  },
+  "numbers": {
+      "thousand.short" : " k",
+      "million.short": " M",
+      "billion.short": " Md",
+      "trillion.short": " Bn"
+  },
+  "languages": {
+      "de": "allemand",
+      "en": "anglais",
+      "es": "espagnol",
+      "fr": "français",
+      "ja": "japonais",
+      "pt": "portugais",
+      "ru": "russe"
+  }
+}

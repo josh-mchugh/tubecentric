@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{landing/layout/layout-landing}">
+    <body layout:fragment="content">
+
+        <div class="container-fluid">
+            <div class="row m-2">
+
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6">
+                                    Video
+                                </div>
+                                <div class="col-3 ml-auto">
+                                    <i class="fa fa-search float-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input class="form-control" type="text" placeholder="Enter title..."/>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tags</label>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Enter tag..."/>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6">
+                                    Metrics
+                                </div>
+                                <div class="col-3 ml-auto">
+                                    <i class="fa fa-search float-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    Title
+                                </div>
+                                <div class="col-12">
+                                    Description
+                                </div>
+                                <div class="col-12">
+                                    Overall
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Large modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Large modal</button>
+
+        <div id="modal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    ...
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
