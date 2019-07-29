@@ -1,0 +1,75 @@
+{
+  "actions": {
+      "copy.to.clipboard": "Скопировать в буфер обмена",
+      "edit": "редактировать",
+      "expand": "расширять",
+      "hide": "Спрятать",
+      "hightlight.all": "Выделить все",
+      "more.videos": "Другие видеоролики",
+      "previous.videos": "Предыдущие видео",
+      "next.step": "Следующий шаг",
+      "previous.step": "Предыдущий шаг",
+      "remove.all": "Убрать все",
+      "submit": "Отправить"
+  },
+  "video": {
+      "description": "Описание",
+      "tags": "Теги",
+      "title" : "заглавие",
+      "views": "Просмотры"
+  },
+  "steps": {
+      "copy": "копия",
+      "search.tags": "Поиск тегов",
+      "title.description" : "Название / Описание"
+  },
+  "errors": {
+      "description.length.error": "Описание превышает предел символов {{value}}.",
+      "general.length.error": "Превышает {{value}} Предел символов",
+      "general.length.warning": "Превышает рекомендуемый символ {{value}}",
+      "title.length.warning": "Заголовок превышает рекомендуемый предел символов {{value}}.",
+      "title.length.error": "Заголовок превышает предел символов {{value}}.",
+      "tags.length.error": "Теги превышают лимиты символов {{value}}."
+  },
+  "general": {
+      "copyright": "Авторские права",
+      "language": "язык"
+  },
+  "content": {
+      "instruction.title": "Упростите процесс создания видео",
+      "instruction.search": "Поиск видео",
+      "instruction.tag": "Выберите Связанные теги",
+      "instruction.enter": "Введите название и описание",
+      "instruction.visualize": "Визуализация размещения тегов",
+      "instruction.copy": "Копировать: Теги, название, описание",
+      "instructions.add.tags": "Ввод или поиск тегов",
+      "tags.in.title": "Процент тегов в заголовке:",
+      "tags.in.description": "Тег, используемый в описании:",
+      "total.tags.used": "Всего использованных тегов:"
+  },
+  "feedback": {
+    "title": "Оставить отзыв",
+    "message": "Поделитесь с нами вашими мыслями. Не стесняйтесь оставлять предложения и рекомендации. Мы хотим помочь вам, упростив процесс создания контента."
+  },
+  "labels": {
+      "enter.description": "Введите описание своего видео",
+      "enter.tags" : "Введите теги",
+      "enter.title": "Введите название видео",
+      "search.youtube": "Поиск на YouTube"
+  },
+  "numbers": {
+      "thousand.short" : " тыс",
+      "million.short": " млн",
+      "billion.short": " млрд",
+      "trillion.short": " трлн"
+  },
+  "languages": {
+      "de": "немецкий",
+      "en": "английский",
+      "es": "испанский",
+      "fr": "французский",
+      "ja": "японский",
+      "pt": "португальский",
+      "ru": "русский"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "actions": {
+      "copy.to.clipboard": "In die Zwischenablage kopieren",
+      "edit": "Bearbeiten",
+      "expand": "Erweitern",
+      "hide": "verbergen",
+      "hightlight.all": "Markieren Sie Alle",
+      "more.videos": "Mehr Videos",
+      "previous.videos": "Vorherige Videos",
+      "next.step": "Nächster Schritt",
+      "previous.step": "Vorheriger Schritt",
+      "remove.all": "Alles entfernen",
+      "submit": "einreichen"
+  },
+  "video": {
+      "description": "Beschreibung",
+      "tags": "Stichworte",
+      "title" : "Titel",
+      "views": "Ansichten"
+  },
+  "steps": {
+      "copy": "Kopieren",
+      "search.tags": "Such-Tags",
+      "title.description" : "Titel / Beschreibung"
+  },
+  "errors": {
+      "description.length.error": "Beschreibung überschreitet das Limit von {{value}} Zeichen.",
+      "general.length.error": "Überschreitet {{value}} Zeichenbeschränkung",
+      "general.length.warning": "Übertrifft das empfohlene {{value}} Zeichen",
+      "title.length.warning": "Der Titel überschreitet das empfohlene Limit von {{value}} Zeichen.",
+      "title.length.error": "Der Titel überschreitet das Limit von {{value}} Zeichen.",
+      "tags.length.error": "Tags überschreiten das Limit von {{value}} Zeichen."
+  },
+  "general": {
+      "copyright": "Urheberrechte",
+      "language": "Sprache"
+  },
+  "content": {
+      "instruction.title": "Vereinfachen Sie Ihren Video-Erstellungsprozess",
+      "instruction.search": "Videos suchen",
+      "instruction.tag": "Wählen Sie Verwandte Tags",
+      "instruction.enter": "Geben Sie Titel und Beschreibung ein",
+      "instruction.visualize": "Visualisierung der Tag-Platzierung",
+      "instruction.copy": "Kopieren: Tags, Titel, Beschreibung",
+      "instructions.add.tags": "Geben Sie oder durchsuchten Tags ein",
+      "tags.in.title": "Prozentsatz der Tags in Titel:",
+      "tags.in.description": "Tag used in Description:",
+      "total.tags.used": "Gesamtzahl der verwendeten Tags:"
+  },
+  "feedback": {
+    "title": "Hinterlasse etwas Feedback",
+    "message": "Lass uns wissen was du denkst. Fühlen Sie sich frei, Vorschläge und Empfehlungen zu hinterlassen. Wir möchten Ihnen helfen, indem Sie Ihren Inhaltserstellungsprozess vereinfachen."
+  },
+  "labels": {
+      "enter.description": "Geben Sie Ihre Videobeschreibung ein",
+      "enter.tags" : "Geben Sie Tags ein",
+      "enter.title": "Gib den Videotitel ein",
+      "search.youtube": "Suche YouTube"
+  },
+  "numbers": {
+      "thousand.short" : "",
+      "million.short": " Mio",
+      "billion.short": " Mrd",
+      "trillion.short": " Bio"
+  },
+  "languages": {
+      "de": "Deutsch",
+      "en": "Englisch",
+      "es": "Spanisch",
+      "fr": "Französisch",
+      "ja": "Japanisch",
+      "pt": "Portugiesisch",
+      "ru": "Russisch"
+  }
+}

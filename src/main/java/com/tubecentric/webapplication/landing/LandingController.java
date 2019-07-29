@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LandingController {
 
     @GetMapping("")
-    public String getHome() {
+    public String getDefault() {
 
-        return "landing/view-home";
+        return "landing/view-landing";
     }
 }

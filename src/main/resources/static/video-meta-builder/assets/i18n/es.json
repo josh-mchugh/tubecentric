@@ -1,0 +1,75 @@
+{
+  "actions": {
+      "copy.to.clipboard": "Copiar al portapapeles",
+      "edit": "Editar",
+      "expand": "Expandir",
+      "hide": "Esconder",
+      "hightlight.all": "Resaltar todo",
+      "more.videos": "Más videos",
+      "previous.videos": "Videos anteriores",
+      "next.step": "Próximo paso",
+      "previous.step": "Paso anterior",
+      "remove.all": "Eliminar todo",
+      "submit": "Enviar"
+  },
+  "video": {
+      "description": "Descripción",
+      "tags": "Etiquetas",
+      "title" : "Título",
+      "views": "vistas"
+  },
+  "steps": {
+      "copy": "Dupdo",
+      "search.tags": "Etiquetas de búsqueda",
+      "title.description" : "Descripción / Título"
+  },
+  "errors": {
+      "description.length.error": "La descripción excede el límite de {{value}} caracteres.",
+      "general.length.error": "Excede el {{value}} límite de caracteres",
+      "general.length.warning": "Excede el personaje recomendado de {{value}}",
+      "title.length.warning": "El título excede el límite recomendado de {{value}} caracteres.",
+      "title.length.error": "El título excede el límite de {{value}} caracteres.",
+      "tags.length.error": "Las etiquetas exceden el límite de {{value}} caracteres."
+  },
+  "general": {
+      "copyright": "Derechos de autor",
+      "language": "Idioma"
+  },
+  "content": {
+      "instruction.title": "Simplifique su proceso de creación de video",
+      "instruction.search": "Buscar videos",
+      "instruction.tag": "Seleccionar etiquetas relacionadas",
+      "instruction.enter": "Ingrese Título y Descripción",
+      "instruction.visualize": "Visualizar colocación de etiqueta",
+      "instruction.copy": "Copiar: Etiquetas, Título, Descripción",
+      "instructions.add.tags": "Introducir o buscar etiquetas",
+      "tags.in.title": "Porcentaje de etiquetas en el título:",
+      "tags.in.description": "Etiqueta utilizada en la descripción:",
+      "total.tags.used": "Total de etiquetas utilizadas:"
+  },
+  "feedback": {
+    "title": "Deje algunos comentarios",
+    "message": "Háganos saber lo que piensas. Siéntase libre de dejar sugerencias y recomendaciones. Queremos ayudarte simplificando tu proceso de creación de contenido."
+  },
+  "labels": {
+      "enter.description": "Ingrese su descripción de video",
+      "enter.tags" : "Ingrese las etiquetas",
+      "enter.title": "Ingrese el título del video",
+      "search.youtube": "Buscar en YouTube"
+  },
+  "numbers": {
+      "thousand.short" : " mil",
+      "million.short": " M",
+      "billion.short": " mil M",
+      "trillion.short": " B"
+  },
+  "languages": {
+      "de": "alemán",
+      "en": "inglés",
+      "es": "español",
+      "fr": "francés",
+      "ja": "japonés",
+      "pt": "portugués",
+      "ru": "ruso"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "actions": {
+      "copy.to.clipboard": "クリップボードにコピー",
+      "edit": "編集",
+      "expand": "展開する",
+      "hide": "隠す",
+      "hightlight.all": "すべてをハイライト",
+      "more.videos": "その他の動画",
+      "previous.videos": "前の動画",
+      "next.step": "次のステップ",
+      "previous.step": "一つ前の手順",
+      "remove.all": "すべて削除する",
+      "submit": "提出する"
+  },
+  "video": {
+      "description": "説明",
+      "tags": "タグ",
+      "title" : "タイトル",
+      "views": "再生回数"
+  },
+  "steps": {
+      "copy": "コピー",
+      "search.tags": "検索タグ",
+      "title.description" : "タイトル説明"
+  },
+  "errors": {
+      "description.length.error": "説明が{{value}}文字の制限を超えています。",
+      "general.length.error": "{{value}}文字制限を超えています",
+      "general.length.warning": "おすすめの{{value}}文字を超えています",
+      "title.length.warning": "タイトルが{{value}}文字の推奨制限を超えています。",
+      "title.length.error": "タイトルが{{value}}文字の制限を超えています。",
+      "tags.length.error": "タグは{{value}}文字の制限を超えています。"
+  },
+  "general": {
+      "copyright": "著作権",
+      "language": "言語"
+  },
+  "content": {
+      "instruction.title": "ビデオ制作プロセスの簡素化",
+      "instruction.search": "検索動画",
+      "instruction.tag": "関連タグを選択",
+      "instruction.enter": "タイトルと説明を入力",
+      "instruction.visualize": "ビジュアルタグの配置",
+      "instruction.copy": "ビジュアルタグの配置",
+      "instructions.add.tags": "入力または検索したタグ",
+      "tags.in.title": "タイトル内のタグの割合：",
+      "tags.in.description": "使用されるタグ説明：",
+      "total.tags.used": "使用されたタグの総数："
+  },
+  "feedback": {
+    "title": "フィードバックを残す",
+    "message": "あなたの考えを教えてください。お気軽に、提案や推奨事項を残してください。コンテンツの作成プロセスを簡素化することで、お客様のお手伝いをしたいと考えています。"
+  },
+  "labels": {
+      "enter.description": "あなたのビデオ記述を入力してください",
+      "enter.tags" : "タグを入力",
+      "enter.title": "ビデオタイトルを入力",
+      "search.youtube": "YouTubeを検索"
+  },
+  "numbers": {
+      "thousand.short" : "K",
+      "million.short": "M",
+      "billion.short": "B",
+      "trillion.short": "T"
+  },
+  "languages": {
+      "de": "ドイツ語",
+      "en": "英語",
+      "es": "スペイン語",
+      "fr": "フランス語",
+      "ja": "日本語",
+      "pt": "ポルトガル語",
+      "ru": "ロシア語"
+  }
+}
