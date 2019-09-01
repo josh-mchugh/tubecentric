@@ -37,6 +37,7 @@
     "homepage": "https://github.com/lifenautjoe/webpack-starter-basic#readme",
     "dependencies": {
         "bootstrap": "^4.0",
+        "datatables.net-bs4": "^1.10.19",
         "jquery": "^3.2.1",
         "popper.js": "^1.12.9"
     },

@@ -1,0 +1,85 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+           http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="jmchugh" id="1.0.0-1">
+        <createTable tableName="registration">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__registration"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="email" type="nvarchar(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="metric_search">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__search"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="query" type="nvarchar(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="count" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="jmchugh" id="1.0.0-2">
+        <createTable tableName="questionnaire">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__questionnaire"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="registration_id" type="nvarchar(255)"/>
+            <column name="frustrations" type="nvarchar(5000)"/>
+            <column name="allow_future_questionnaires" type="boolean" defaultValue="false"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="questionnaire" baseColumnNames="registration_id" constraintName="questionnaire_registration_id" referencedTableName="registration" referencedColumnNames="id"/>
+        <createTable tableName="questionnaire_feature">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__questionnaire_feature"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="questionnaire_id" type="nvarchar(255)"/>
+            <column name="feature_set" type="varchar(255)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="questionnaire_feature" baseColumnNames="questionnaire_id" constraintName="questionnaire_feature_questionnaire" referencedTableName="questionnaire"  referencedColumnNames="id"/>
+        <createTable tableName="questionnaire_report_interval">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__questionnaire_report_interval"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="questionnaire_id" type="nvarchar(255)"/>
+            <column name="interval" type="varchar(255)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="questionnaire_report_interval" baseColumnNames="questionnaire_id" constraintName="questionnaire_report_interval_questionnaire" referencedTableName="questionnaire"  referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

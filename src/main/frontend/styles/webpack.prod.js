@@ -10,7 +10,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         landing: './src/landing.js',
-        dashboard: './src/dashboard.js'
+        search: './src/search.js'
     },
     output: {
         filename: '[name].js',
