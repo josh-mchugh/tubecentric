@@ -224,6 +224,15 @@
 						</goals>
 					</execution>
 					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
 						<id>Build Frontend styles</id>
 						<goals>
 							<goal>gulp</goal>
