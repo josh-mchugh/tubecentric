@@ -5,6 +5,7 @@ FROM maven:3.6.0-jdk-11-slim AS build
 LABEL maintainer="Josh McHugh"
 LABEL description="TubeCentric Maven Build"
 COPY src/ /src
+COPY frontend/ /frontend
 COPY pom.xml /
 COPY docker/server.xml docker/server.xml
 COPY docker/web.xml docker/web.xml
