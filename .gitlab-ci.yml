@@ -13,7 +13,7 @@ stages:
 maven-build:
   image: maven:3-jdk-8
   stage: build
-  script: "mvn clean install -B"
+  script: "mvn package -B"
   artifacts:
     paths:
       - target/*.war
@@ -21,7 +21,7 @@ maven-build:
 docker-build:
   stage: package
   script:
-    - docker build . -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - docker build . -t $CI_REGISTRY_IMAGE:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker push $CI_REGISTRY_IMAGE:$CI_PIPELINE_ID
 
