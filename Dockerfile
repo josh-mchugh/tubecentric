@@ -9,7 +9,8 @@ COPY frontend/ /frontend
 COPY pom.xml /
 COPY docker/server.xml docker/server.xml
 COPY docker/web.xml docker/web.xml
-RUN mvn -f pom.xml clean package -B
+RUN mvn -B dependency:resolve dependency:resolve-plugins
+RUN mvn clean install
 
 #
 # Package stage
