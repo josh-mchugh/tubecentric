@@ -3,7 +3,7 @@
 #
 # Build stage
 #
-FROM maven:3.6.0-jdk-11-slim AS build
+FROM maven:3.6.2-jdk-11-slim AS build
 LABEL maintainer="Josh McHugh"
 LABEL description="TubeCentric Maven Build"
 COPY src/ /src
@@ -17,7 +17,7 @@ RUN mvn clean install
 #
 # Package stage
 #
-FROM tomcat:9.0.24-jdk8-openjdk as runtime
+FROM tomcat:9.0.26-jdk11-openjdk-slim as runtime
 LABEL maintainer="Josh McHugh"
 LABEL description="TubeCentric Tomcat Runtime"
 WORKDIR /
