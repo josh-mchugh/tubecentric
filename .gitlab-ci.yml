@@ -9,6 +9,7 @@ variables:
 stages:
   - build
   - package
+  - deploy
 
 maven-build:
   image: maven:3-jdk-8
@@ -26,8 +27,8 @@ docker-build:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
 deploy-production:
-  stage: deploy
   image: linkyard/docker-helm
+  stage: deploy
   script:
     - helm init --upgrade
     - helm upgrade --install tubecentric --namespace default --wait --set image.tag=$CI_COMMIT_SHORT_SHA k8s/tubecentric/
