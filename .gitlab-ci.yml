@@ -30,8 +30,8 @@ deploy-production:
   image: linkyard/docker-helm
   stage: deploy
   script:
+    - echo "Initializing help and upgrading helm..."
     - helm init --upgrade
-    - helm upgrade --install tubecentric --namespace default --wait --set image.tag=$CI_COMMIT_SHORT_SHA k8s/tubecentric/
   when: manual
   only:
     - master
