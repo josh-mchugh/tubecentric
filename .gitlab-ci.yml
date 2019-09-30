@@ -27,11 +27,12 @@ docker-build:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
 deploy-production:
-  image: linkyard/docker-helm
+  image: alpine/helm
   stage: deploy
   script:
-    - echo "Initializing help and upgrading helm..."
-    - helm init --upgrade
+    - "echo Initializing help and upgrading helm..."
+    - "help --help"
+    - "helm init --upgrade"
   when: manual
   only:
     - master
