@@ -30,9 +30,13 @@ deploy-production:
   image: alpine/helm
   stage: deploy
   script:
-    - "echo Initializing help and upgrading helm..."
-    - "help --help"
-    - "helm init --upgrade"
+    - helm upgrade
+      --install
+      --set image.tag="${$CI_COMMIT_SHORT_SHA}"
+      --wait
+      --force
+      tubecentric-${CI_COMMIT_SHORT_SHA}
+      ./k8s/tubecentric
   when: manual
   only:
     - master
