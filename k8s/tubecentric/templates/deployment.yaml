@@ -32,14 +32,14 @@ spec:
             httpGet:
               path: /actuator/info
               port: http
-            initialDelaySeconds: 3
-            periodSeconds: 3
+            initialDelaySeconds: 15
+            periodSeconds: 15
           readinessProbe:
             httpGet:
               path: /actuator/info
               port: http
-            initialDelaySeconds: 3
-            periodSeconds: 3
+            initialDelaySeconds: 15
+            periodSeconds: 15
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
