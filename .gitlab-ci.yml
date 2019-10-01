@@ -27,11 +27,16 @@ docker-build:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
 deploy-production:
-  image: linkyard/docker-helm
+  image: alpine/helm
   stage: deploy
   script:
-    - echo "Initializing help and upgrading helm..."
-    - helm init --upgrade
+    - helm upgrade
+      --install
+      --set image.tag="${$CI_COMMIT_SHORT_SHA}"
+      --wait
+      --force
+      tubecentric-${CI_COMMIT_SHORT_SHA}
+      ./k8s/tubecentric
   when: manual
   only:
     - master
