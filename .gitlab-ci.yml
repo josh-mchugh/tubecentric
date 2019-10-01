@@ -36,7 +36,7 @@ deploy-production:
     - doctl auth init -t $DIGITAL_OCEAN_TOKEN
     - doctl kubernetes cluster kubeconfig save $DIGITAL_OCEAN_KUBERNETES_NAME
   script:
-    - helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force tubecentric-$CI_COMMIT_SHORT_SHA ./k8s/tubecentric
+    - helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force --recreate-pods tubecentric-$CI_COMMIT_SHORT_SHA ./k8s/tubecentric
   when: manual
   only:
     - master
