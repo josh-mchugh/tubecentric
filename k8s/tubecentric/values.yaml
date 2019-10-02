@@ -24,9 +24,15 @@ ingress:
     kubernetes.io/ingress.class: traefik
     kubernetes.io/tls-acme: "true"
   hosts:
+    - host: tubecentric.io
+        paths:
+          - /
     - host: "*.tubecentric.io"
       paths:
         - /
+    - host: tubecentric.com
+        paths:
+          - /
     - host: "*.tubecentric.com"
       paths:
         - /
