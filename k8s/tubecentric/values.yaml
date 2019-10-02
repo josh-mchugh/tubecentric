@@ -25,14 +25,14 @@ ingress:
     kubernetes.io/tls-acme: "true"
   hosts:
     - host: tubecentric.io
-        paths:
-          - /
+      paths:
+        - /
     - host: "*.tubecentric.io"
       paths:
         - /
     - host: tubecentric.com
-        paths:
-          - /
+      paths:
+        - /
     - host: "*.tubecentric.com"
       paths:
         - /
