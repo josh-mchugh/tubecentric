@@ -39,7 +39,7 @@ deploy-production:
     - export HELM_HOST=localhost:44134
   script:
     - helm lint ./k8s/tubecentric --strict
-    - $TILLER & helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force --replace tubecentric ./k8s/tubecentric
+    - $TILLER & helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force tubecentric ./k8s/tubecentric
   when: manual
   only:
     - master
