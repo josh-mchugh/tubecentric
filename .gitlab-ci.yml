@@ -35,9 +35,11 @@ deploy-production:
     - brew install kubernetes-helm
     - doctl auth init -t $DIGITAL_OCEAN_TOKEN
     - doctl kubernetes cluster kubeconfig save $DIGITAL_OCEAN_KUBERNETES_NAME
+    - alias TILLER=/home/linuxbrew/.linuxbrew/Cellar/kubernetes-helm/2.14.3/bin/tiller
+    - export HELM_HOST=localhost:44134
   script:
     - helm lint ./k8s/tubecentric --strict
-    - helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force --recreate-pods tubecentric ./k8s/tubecentric
+    - TILLER & helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force tubecentric ./k8s/tubecentric
   when: manual
   only:
     - master
