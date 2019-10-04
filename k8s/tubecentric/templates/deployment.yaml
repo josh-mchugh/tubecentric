@@ -33,12 +33,13 @@ spec:
               path: /actuator/info
               port: http
             initialDelaySeconds: 15
-            periodSeconds: 2
+            periodSeconds: 15
           readinessProbe:
             httpGet:
               path: /actuator/info
               port: http
             initialDelaySeconds: 15
+            periodSeconds: 15
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
