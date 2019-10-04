@@ -40,7 +40,7 @@ deploy-production:
     - helm lint ./k8s/tubecentric --strict
     - (/home/linuxbrew/.linuxbrew/Cellar/kubernetes-helm/2.14.3/bin/tiller &)
     - helm init --client-only
-    - helm upgrade --install --namespace kube-system --set rbac.enabled=true --set imageTag=1.7 --set ssl.enabled=true --set ssl.enforced=true --set acme.enabled=true --set acme.email=dev.tubecentric@gmail.com --set acme.staging=false --set acme.challengeType=tls-alpn-01 --set acme.persistence.enabled=false traefik stable/traefik
+    - helm upgrade --install --namespace kube-system --set rbac.enabled=true --set ssl.enabled=true --set ssl.enforced=true --set acme.enabled=true --set acme.email=dev.tubecentric@gmail.com --set acme.staging=false --set acme.challengeType=tls-alpn-01 --set acme.persistence.enabled=false traefik stable/traefik
     - helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force tubecentric ./k8s/tubecentric
   when: manual
   only:
