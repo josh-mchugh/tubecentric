@@ -35,7 +35,6 @@ deploy-production:
     - brew install kubernetes-helm
     - doctl auth init -t $DIGITAL_OCEAN_TOKEN
     - doctl kubernetes cluster kubeconfig save $DIGITAL_OCEAN_KUBERNETES_NAME
-    - export
     - export HELM_HOST=localhost:44134
   script:
     - helm lint ./k8s/tubecentric --strict
