@@ -2,10 +2,6 @@ image: docker:stable
 services:
   - docker:stable-dind
 
-variables:
-  DOCKER_DRIVER: overlay
-  SPRING_PROFILES_ACTIVE: local
-
 stages:
   - build
   - package
