@@ -7,7 +7,7 @@ import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.tubecentric.webapplication.config.AppConfig;
+import com.tubecentric.webapplication.framework.config.AppConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

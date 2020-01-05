@@ -23,7 +23,7 @@ public class VideoControllerService implements IVideoControllerService {
     @Override
     public Map<String, String> getSearchParams(String query, String pageToken) {
 
-        return new SearchParameters.Builder()
+        Map<String, String> params = new SearchParameters.Builder()
                 .key(apiKey)
                 .part("id,snippet")
                 .maxResults(10)
@@ -32,6 +32,8 @@ public class VideoControllerService implements IVideoControllerService {
                 .fields(getSearchFields())
                 .build()
                 .toMap();
+
+        return params;
     }
 
     private SearchFields getSearchFields() {
@@ -54,7 +56,7 @@ public class VideoControllerService implements IVideoControllerService {
     @Override
     public Map<String, String> getVideoParams(Collection<String> ids, String language) {
 
-        return new VideoParameters.Builder()
+        Map<String, String> params = new VideoParameters.Builder()
                 .key(apiKey)
                 .ids(ids)
                 .hl(language)
@@ -62,6 +64,8 @@ public class VideoControllerService implements IVideoControllerService {
                 .fields(getVideoFields())
                 .build()
                 .toMap();
+
+        return params;
 
     }
 
