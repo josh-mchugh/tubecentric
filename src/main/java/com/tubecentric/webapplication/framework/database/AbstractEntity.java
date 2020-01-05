@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.framework;
+package com.tubecentric.webapplication.framework.database;
 
 import lombok.Getter;
 import lombok.Setter;

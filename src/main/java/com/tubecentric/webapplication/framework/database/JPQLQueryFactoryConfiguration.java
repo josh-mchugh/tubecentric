@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.framework;
+package com.tubecentric.webapplication.framework.database;
 
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
