@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.config;
+package com.tubecentric.webapplication.framework.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
