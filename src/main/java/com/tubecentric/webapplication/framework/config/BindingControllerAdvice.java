@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.config;
+package com.tubecentric.webapplication.framework.config;
 
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;

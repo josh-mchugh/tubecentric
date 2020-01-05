@@ -1,6 +1,6 @@
 package com.tubecentric.webapplication.register.entity;
 
-import com.tubecentric.webapplication.framework.AbstractEntity;
+import com.tubecentric.webapplication.framework.database.AbstractEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
