@@ -3,9 +3,9 @@ package com.tubecentric.webapplication.extension;
 import com.tubecentric.webapplication.extension.youtube.IYouTubeClient;
 import com.tubecentric.webapplication.extension.youtube.model.SearchParams;
 import com.tubecentric.webapplication.extension.youtube.model.VideoParams;
+import lombok.RequiredArgsConstructor;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,19 +14,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class TagSearchService implements ITagSearchService {
 
-    @Autowired
-    private IYouTubeClient youTubeClient;
+    private final IYouTubeClient youTubeClient;
 
     @Value("${app.youtube.api.key}")
     private String apiKey;
 
     @Override
-    public List<ExtractedResult> getSearchTags() {
+    public List<ExtractedResult> getSearchTags(String query) {
 
         SearchParams searchParams = SearchParams.builder()
-                .q("Hot dogs horseshoes hand grenades")
+                .q(query)
                 .key(apiKey)
                 .build();
 
@@ -43,6 +43,6 @@ public class TagSearchService implements ITagSearchService {
                 .flatMap(video -> video.getSnippet().getTags().stream())
                 .collect(Collectors.toSet());
 
-        return FuzzySearch.extractTop("Hot dogs horseshoes hand grenades", tags, 25, 35);
+        return FuzzySearch.extractTop(query, tags, 20, 35);
     }
 }

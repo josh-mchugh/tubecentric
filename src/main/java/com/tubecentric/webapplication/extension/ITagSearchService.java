@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ITagSearchService {
 
-    List<ExtractedResult> getSearchTags();
+    List<ExtractedResult> getSearchTags(String query);
 }
