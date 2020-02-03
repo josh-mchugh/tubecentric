@@ -28,14 +28,14 @@ deploy-production:
   before_script:
     - brew install kubectl
     - brew install doctl
-    - brew install kubernetes-helm
+    - brew install helm@2
     - doctl auth init -t $DIGITAL_OCEAN_TOKEN
     - doctl kubernetes cluster kubeconfig save $DIGITAL_OCEAN_KUBERNETES_NAME
     - export HELM_HOST=localhost:44134
   script:
     - helm lint ./k8s/tubecentric --strict
     - (/home/linuxbrew/.linuxbrew/Cellar/kubernetes-helm/2.14.3/bin/tiller &)
-    - helm init -c
+    - helm init --client-only
     - helm upgrade --install --namespace kube-system --set rbac.enabled=true --set ssl.enabled=true --set ssl.enforced=true --set acme.enabled=true --set acme.email=dev.tubecentric@gmail.com --set acme.staging=false --set acme.challengeType=tls-alpn-01 --set acme.persistence.enabled=false traefik stable/traefik
     - helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force tubecentric ./k8s/tubecentric
   when: manual
