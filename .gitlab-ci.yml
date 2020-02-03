@@ -28,7 +28,7 @@ deploy-production:
   before_script:
     - brew install kubectl
     - brew install doctl
-    - brew install kubernetes-helm@2
+    - brew install kubernetes-helm@2.9.1
     - doctl auth init -t $DIGITAL_OCEAN_TOKEN
     - doctl kubernetes cluster kubeconfig save $DIGITAL_OCEAN_KUBERNETES_NAME
     - export HELM_HOST=localhost:44134
