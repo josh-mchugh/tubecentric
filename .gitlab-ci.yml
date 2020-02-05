@@ -38,7 +38,7 @@ deploy-production:
     - helm repo add stable https://kubernetes-charts.storage.googleapis.com
     - helm repo update
     - helm upgrade --install --set rbac.enabled=true --set ssl.enabled=true --set ssl.enforced=true --set acme.enabled=true --set acme.email=dev.tubecentric@gmail.com --set acme.staging=false --set acme.challengeType=tls-alpn-01 --set acme.persistence.enabled=false traefik stable/traefik
-    - helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --timeout --wait --force tubecentric ./k8s/tubecentric
+    - helm upgrade --install --set image.tag=$CI_COMMIT_SHORT_SHA --wait --force tubecentric ./k8s/tubecentric
   when: manual
   only:
     - master
