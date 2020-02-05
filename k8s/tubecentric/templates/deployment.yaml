@@ -38,8 +38,8 @@ spec:
             httpGet:
               path: /actuator/info
               port: http
-            initialDelaySeconds: 15
-            periodSeconds: 15
+            initialDelaySeconds: 60
+            periodSeconds: 60
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
