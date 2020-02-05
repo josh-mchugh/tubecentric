@@ -1,9 +1,0 @@
-username: gitlab+deploy-token-97211
-password: sY8y9e9s4biE2sXNZqsF
-
-kubectl create secret docker-registry gitlab-registry
- --docker-server=registry.gitlab.com
- --docker-username=gitlab+deploy-token-97211
- --docker-password=sY8y9e9s4biE2sXNZqsF
- --docker-email=joshua.mchugh01@gmail.com
- --kubeconfig="kube-tubecentric-1-kubeconfig.yaml"
