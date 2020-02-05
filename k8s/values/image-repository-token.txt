@@ -1,9 +1,0 @@
-username: username
-password: password
-
-kubectl create secret docker-registry gitlab-registry
- --docker-server=docker-server
- --docker-username=username
- --docker-password=password
- --docker-email=docker-email
- --kubeconfig="kube-tubecentric-1-kubeconfig.yaml"
