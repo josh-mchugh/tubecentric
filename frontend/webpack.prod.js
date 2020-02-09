@@ -9,8 +9,7 @@ const buildPath = path.resolve(__dirname, 'dist/');
 module.exports = {
     devtool: 'source-map',
     entry: {
-        landing: path.resolve(__dirname, './src/landing.js'),
-        search: path.resolve(__dirname, './src/search.js')
+        newLanding: path.resolve(__dirname, './src/new-landing.js'),
     },
     output: {
         filename: '[name].js',
@@ -53,6 +52,10 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: "file-loader?name=/resources/images/[name].[ext]"
             }
         ]
     },
