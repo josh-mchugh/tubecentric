@@ -11,6 +11,6 @@ public class LandingController {
     @GetMapping("")
     public String getDefault() {
 
-        return "landing/view-landing";
+        return "landing/view-new-landing";
     }
 }
