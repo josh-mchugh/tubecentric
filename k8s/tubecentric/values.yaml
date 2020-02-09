@@ -27,13 +27,13 @@ ingress:
     - host: tubecentric.io
       paths:
         - /
-    - host: "*.tubecentric.io"
+    - host: www.tubecentric.io
       paths:
         - /
     - host: tubecentric.com
       paths:
         - /
-    - host: "*.tubecentric.com"
+    - host: www.tubecentric.com
       paths:
         - /
 
