@@ -43,7 +43,7 @@ gulp.task('copy:resources:css', function() {
 
 gulp.task('copy:resources:images', function () {
 
-    return gulp.src('src/resources/images/**.*')
+    return gulp.src('src/resources/new-images/**.*')
         .pipe(gulp.dest('../src/main/resources/static/resources/images'))
         .pipe(size());
 });
