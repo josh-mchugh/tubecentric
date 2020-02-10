@@ -82,4 +82,30 @@
         <addForeignKeyConstraint baseTableName="questionnaire_report_interval" baseColumnNames="questionnaire_id" constraintName="questionnaire_report_interval_questionnaire" referencedTableName="questionnaire"  referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="1.0.0-3" author="jmchugh">
+        <createTable tableName="keyword_search_term">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__keyword_search_term"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="query" type="nvarchar(2500)"/>
+        </createTable>
+        <createTable tableName="keyword_search_term_entry">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__keyword_search_term_entry"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="keyword_search_term_id" type="nvarchar(255)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="keyword_search_term_entry" baseColumnNames="keyword_search_term_id" constraintName="keyword_search_term_entry_keyword_search_term" referencedTableName="keyword_search_term"  referencedColumnNames="id"/>
+    </changeSet>
+
 </databaseChangeLog>
