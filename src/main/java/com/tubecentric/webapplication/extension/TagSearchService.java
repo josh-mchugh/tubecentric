@@ -1,5 +1,6 @@
 package com.tubecentric.webapplication.extension;
 
+import com.tubecentric.webapplication.extension.entity.service.IKeywordSearchService;
 import com.tubecentric.webapplication.extension.youtube.IYouTubeClient;
 import com.tubecentric.webapplication.extension.youtube.model.SearchParams;
 import com.tubecentric.webapplication.extension.youtube.model.VideoParams;
@@ -18,12 +19,15 @@ import java.util.stream.Collectors;
 public class TagSearchService implements ITagSearchService {
 
     private final IYouTubeClient youTubeClient;
+    private final IKeywordSearchService keywordSearchService;
 
     @Value("${app.youtube.api.key}")
     private String apiKey;
 
     @Override
     public List<ExtractedResult> getSearchTags(String query) {
+
+        keywordSearchService.addKeywordSearchTerm(query);
 
         SearchParams searchParams = SearchParams.builder()
                 .q(query)
