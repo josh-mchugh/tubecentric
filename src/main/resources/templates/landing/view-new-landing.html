@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link th:href="@{/resources/styles/newLanding.css}" rel="stylesheet">
         <link rel="icon" sizes="64x64" th:href="@{/resources/images/fav.png}">
+        <script th:src="@{/resources/vendor/newLanding.js}"></script>
     </head>
     <body>
 
@@ -57,21 +58,8 @@
         </div>
 
         <!-- Subscribe Section -->
-        <div class="section">
-            <div class="content subscribe">
-                <div class="header">
-                    <h2>Subscribe</h2>
-                    <p class="subheader">Subscribe for updates and tips and tricks!</p>
-                </div>
-                <div class="body">
-                    <form>
-                        <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Email">
-                        </div>
-                        <button class="btn btn-subscribe btn-block">Subscribe</button>
-                    </form>
-                </div>
-            </div>
+        <div id="subscribeSection">
+            <div th:replace="~{landing/fragments/partial-subscribe-section :: component(${form})}"></div>
         </div>
 
         <!--Footer -->
