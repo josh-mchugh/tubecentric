@@ -108,4 +108,18 @@
         <addForeignKeyConstraint baseTableName="keyword_search_term_entry" baseColumnNames="keyword_search_term_id" constraintName="keyword_search_term_entry_keyword_search_term" referencedTableName="keyword_search_term"  referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="1.0.0-4" author="jmchugh">
+        <createTable tableName="subscriber">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__subscriber"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="email" type="nvarchar(255)"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
