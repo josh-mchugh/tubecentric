@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <body th:fragment="component (form)">
+        <div class="section">
+            <div class="content subscribe">
+                <div class="header">
+                    <h2>Subscribe</h2>
+                    <p class="subheader">Subscribe for updates and tips and tricks!</p>
+                </div>
+                <div class="body">
+                    <form id="subscribeForm" method="post" action="/subscribe" th:object="${form}">
+                        <div class="form-group">
+                            <input class="form-control" th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}" type="text" th:field="*{email}" placeholder="Email">
+                            <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
+                        </div>
+                        <button class="btn btn-subscribe btn-block">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function() {
+
+                $("#subscribeForm").on("submit", function(event){
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    $.ajax({
+                        url: "/subscribe",
+                        method: "POST",
+                        data: $(this).serialize()
+                    })
+                    .done(function(response) {
+                        $("#subscribeSection").html(response);
+                    });
+
+                    return false;
+                });
+            });
+
+        </script>
+    </body>
+</html>
