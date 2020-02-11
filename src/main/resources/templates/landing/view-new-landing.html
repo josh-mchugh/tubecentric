@@ -8,61 +8,62 @@
     </head>
     <body>
 
-        <!-- Top Navbar-->
-        <nav class="top-nav sticky-top">
-            <a class="logo" href="#" aria-label="Product">
-                <img src="./resources/images/logo.svg" />
-            </a>
-        </nav>
-
-        <!-- Call To Action -->
-        <div class="call-to-action">
-            <div class="header">
-                <h1>Grow Your Channel</h1>
-                <p class="subheader">Increasing your views and subscribers is only a click away </p>
-                <a class="btn btn-secondary download" href="https://chrome.google.com/webstore/detail/tubecentric/goembglpcahafaplhegdmhnifecdofgd">
-                    Install Chrome Extension
-                    <img src="./resources/images/chrome.svg"></svg>
+        <!--/* Top Navbar */-->
+        <header>
+            <nav class="top-nav sticky-top">
+                <a class="logo" href="#" aria-label="Product">
+                    <img src="./resources/images/logo.svg" />
                 </a>
-            </div>
-        </div>
+            </nav>
+        </header>
 
-        <!-- About Section -->
-        <div class="section">
-            <div class="content">
+        <!--/* Main */-->
+        <main>
+            <!--/* Call To Action */-->
+            <section class="call-to-action">
                 <div class="header">
-                    <h2>Maximize Your Reach</h2>
+                    <h1>Grow Your Channel</h1>
+                    <p class="subheader">Increasing your views and subscribers is only a click away </p>
+                    <a class="btn btn-secondary download" href="https://chrome.google.com/webstore/detail/tubecentric/goembglpcahafaplhegdmhnifecdofgd">
+                        Install Chrome Extension
+                        <img src="./resources/images/chrome.svg"></svg>
+                    </a>
                 </div>
-                <div class="description">
-                    Easily add new and relevant tags to your videos to show up in more YouTube Searches and Related videos.
-                </div>
-            </div>
-            <div class="image">
-                <img class="rounded mx-auto d-block" src="./resources/images/youtube-hd.jpg" alt="">
-            </div>
-        </div>
+            </section>
 
-        <!-- Features Section -->
-        <div class="section">
-            <div class="image">
-                <img class="rounded mx-auto d-block" src="./resources/images/youtube-dashboard-hd.jpg" alt="">
-            </div>
-            <div class="content">
-                <div class="header">
-                    <h2>Easily Discover Tags</h2>
-                </div>
-                <div class="description">
-                    Quickly and easily discover relevant tags to reach your target audience more efficiently so you can focus on creating quality content.
-                </div>
-            </div>
-        </div>
+            <!--/* About Section */-->
+            <section class="section">
+                <article class="content">
+                    <h2 class="header">Maximize Your Reach</h2>
+                    <div class="description">
+                        Easily add new and relevant tags to your videos to show up in more YouTube Searches and Related videos.
+                    </div>
+                </article>
+                <figure class="image">
+                    <img class="rounded mx-auto d-block" src="./resources/images/youtube-hd.jpg" alt="">
+                </figure>
+            </section>
 
-        <!-- Subscribe Section -->
-        <div id="subscribeSection">
-            <div th:replace="~{landing/fragments/partial-subscribe-section :: component(${form})}"></div>
-        </div>
+            <!--/* Features Section */-->
+            <section class="section">
+                <figure class="image">
+                    <img class="rounded mx-auto d-block" src="./resources/images/youtube-dashboard-hd.jpg" alt="">
+                </figure>
+                <article class="content">
+                    <h2 class="header">Easily Discover Tags</h2>
+                    <div class="description">
+                        Quickly and easily discover relevant tags to reach your target audience more efficiently so you can focus on creating quality content.
+                    </div>
+                </article>
+            </section>
 
-        <!--Footer -->
+            <!--/* Subscribe Section */-->
+            <div id="subscribeSection">
+                <div th:replace="~{landing/fragments/partial-subscribe-section :: component(${form})}"></div>
+            </div>
+        </main>
+
+        <!--/* Footer */-->
         <footer class="footer">
             <div class="content">
                 <small class="text-muted">TubeCentric &copy; 2020</small>
