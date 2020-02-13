@@ -126,12 +126,19 @@
 
 .footer {
     display: flex;
+    flex-direction: column;
+    padding-top: 15px;
 
     .content {
         margin: auto;
         text-align: center;
-        margin: 15px auto;
+        margin: 0 auto;
+        padding-bottom: 15px;
     }
+}
+
+.privacy-policy, .terms-of-service {
+    padding: 25px 0;
 }
 
 @media only screen and (max-width: 576px) {
