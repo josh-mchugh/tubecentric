@@ -28,6 +28,18 @@ public class LandingController {
         return "landing/view-new-landing";
     }
 
+    @GetMapping("/privacy-policy")
+    public String getPrivacyPolicy() {
+
+        return "landing/view-new-privacy-policy";
+    }
+
+    @GetMapping("/terms-of-service")
+    public String getTermsOfService() {
+
+        return "landing/view-new-terms-of-service";
+    }
+
     @PostMapping("/subscribe")
     public String getSubscribe(@Valid @ModelAttribute("form") SubscribeForm form, BindingResult bindingResult) {
 

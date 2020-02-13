@@ -5,13 +5,14 @@
         <link th:href="@{/resources/styles/newLanding.css}" rel="stylesheet">
         <link rel="icon" sizes="64x64" th:href="@{/resources/images/fav.png}">
         <script th:src="@{/resources/vendor/newLanding.js}"></script>
+        <title>TubeCentric - YouTube SEO Chrome Extension</title>
     </head>
     <body>
 
         <!--/* Top Navbar */-->
         <header>
             <nav class="top-nav sticky-top">
-                <a class="logo" href="#" aria-label="Product">
+                <a class="logo" href="/" aria-label="Product">
                     <img src="./resources/images/logo.svg" />
                 </a>
             </nav>
@@ -67,6 +68,20 @@
         <footer class="footer">
             <div class="content">
                 <small class="text-muted">TubeCentric &copy; 2020</small>
+            </div>
+            <div class="content">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/terms-of-service}">
+                            <small class="text-muted">Terms of Service</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted" th:href="@{/privacy-policy}">
+                            <small class="text-muted">Privacy Policy</small>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </footer>
 
