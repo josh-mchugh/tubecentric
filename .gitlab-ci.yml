@@ -32,6 +32,7 @@ deploy-production:
     - helm version
     - doctl auth init -t $DIGITAL_OCEAN_TOKEN
     - doctl kubernetes cluster kubeconfig save $DIGITAL_OCEAN_KUBERNETES_NAME
+    - kubectl apply secret docker-registry gitlab-registry --docker-server=$DIGITAL_OCEAN_REGISTERY_SERVER --docker-username=$DIGITAL_OCEAN_REGISTERY_USERNAME --docker-password=$DIGITAL_OCEAN_TOKEN --docker-email=$DIGITAL_OCEAN_REGISTERY_EMAIL
   script:
     - helm lint ./k8s/tubecentric --strict
     - helm repo add stable https://kubernetes-charts.storage.googleapis.com
