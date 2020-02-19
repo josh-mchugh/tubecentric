@@ -2,10 +2,21 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Terms of Service</title>
+
+        <th:block th:if="${@environment.getActiveProfiles()[0] == 'prod'}">
+            <!--/* Google Analytics */-->
+            <script >
+                window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+                ga('create', 'UA-124744065-1', 'auto');
+                ga('send', 'pageview');
+            </script>
+            <script async src='https://www.google-analytics.com/analytics.js'></script>
+        </th:block>
+
         <link th:href="@{/resources/styles/newLanding.css}" rel="stylesheet">
         <link rel="icon" sizes="64x64" th:href="@{/resources/images/fav.png}">
         <script th:src="@{/resources/vendor/newLanding.js}"></script>
-        <title>Terms of Service</title>
     </head>
     <body>
 
