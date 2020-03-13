@@ -121,5 +121,13 @@
             <column name="email" type="nvarchar(255)"/>
         </createTable>
     </changeSet>
+    
+    <changeSet id="1" author="jmchugh">
+        <dropTable tableName="questionnaire_report_interval" />
+        <dropTable tableName="questionnaire_feature" />
+        <dropTable tableName="questionnaire" />
+        <dropTable tableName="metric_search" />
+        <dropTable tableName="registration" />
+    </changeSet>
 
 </databaseChangeLog>

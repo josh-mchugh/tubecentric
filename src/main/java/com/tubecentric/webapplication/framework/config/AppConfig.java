@@ -11,24 +11,15 @@ import javax.validation.constraints.NotBlank;
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
 
-    private AdWords adWords;
+    private YouTube youTube;
 
     @Data
-    public static class AdWords {
+    public static class YouTube {
 
         @NotBlank
-        private String clientId;
+        private String key;
 
         @NotBlank
-        private String clientSecret;
-
-        @NotBlank
-        private String developerToken;
-
-        @NotBlank
-        private String clientCustomerId;
-
-        @NotBlank
-        private String refreshToken;
+        private String baseUrl;
     }
 }

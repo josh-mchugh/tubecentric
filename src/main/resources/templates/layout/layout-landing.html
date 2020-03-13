@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">TubeCentric</title>
+
+        <th:block th:if="${!#lists.isEmpty(@environment.getActiveProfiles())}">
+            <th:block th:if="${@environment.getActiveProfiles()[0] == 'prod'}">
+                <!--/* Google Analytics */-->
+                <script >
+                    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+                    ga('create', 'UA-124744065-1', 'auto');
+                    ga('send', 'pageview');
+                </script>
+                <script async src='https://www.google-analytics.com/analytics.js'></script>
+            </th:block>
+        </th:block>
+
+        <link th:href="@{/resources/styles/landing.css}" rel="stylesheet">
+        <link rel="icon" sizes="64x64" th:href="@{/resources/images/fav.png}">
+        <script th:src="@{/resources/vendor/landing.js}"></script>
+    </head>
+    <body>
+
+        <!--/* Top Navbar */-->
+        <header>
+            <nav class="top-nav sticky-top">
+                <a class="logo" href="/" aria-label="Product">
+                    <img src="./resources/images/logo.svg" />
+                </a>
+            </nav>
+        </header>
+
+        <div layout:fragment="content"></div>
+
+        <!--/* Footer */-->
+        <footer class="footer">
+            <div class="content">
+                <small class="text-muted">TubeCentric &copy; 2020</small>
+            </div>
+            <div class="content">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/terms-of-service}">
+                            <small class="text-muted">Terms of Service</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted" th:href="@{/privacy-policy}">
+                            <small class="text-muted">Privacy Policy</small>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+    </body>
+</html>
