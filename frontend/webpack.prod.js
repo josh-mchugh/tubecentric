@@ -9,7 +9,7 @@ const buildPath = path.resolve(__dirname, 'dist/');
 module.exports = {
     devtool: 'source-map',
     entry: {
-        newLanding: path.resolve(__dirname, './src/new-landing.js'),
+        landing: path.resolve(__dirname, './src/landing.js'),
     },
     output: {
         filename: '[name].js',
