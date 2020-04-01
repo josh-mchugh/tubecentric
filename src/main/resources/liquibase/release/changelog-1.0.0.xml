@@ -130,4 +130,97 @@
         <dropTable tableName="registration" />
     </changeSet>
 
+    <changeSet id="2" author="jmchugh">
+        <createTable tableName="users">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__users"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="sub" type="nvarchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="nvarchar(255)"/>
+            <column name="email" type="nvarchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email_verified" type="boolean"/>
+            <column name="image_url" type="nvarchar(2500)"/>
+            <column name="locale" type="nvarchar(255)"/>
+            <column name="account_type" type="varchar(255)"/>
+            <column name="subscription_type" type="varchar(255)"/>
+        </createTable>
+        <createTable tableName="users_access_token">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__users_access_token"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="users_id" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="refresh_token_value" type="nvarchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="refresh_token_issued_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="access_token_type" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="access_token_value" type="nvarchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="access_token_issued_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="access_token_expires_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="users_access_token" baseColumnNames="users_id" constraintName="users_access_token_users" referencedTableName="users"  referencedColumnNames="id"/>
+
+        <createTable tableName="users_access_token_scope">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__users_access_token_scope"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="user_access_token_id" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scope" type="nvarchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="users_access_token_scope" baseColumnNames="user_access_token_id" constraintName="users_access_scope_token_users" referencedTableName="users_access_token"  referencedColumnNames="id"/>
+
+        <createTable tableName="users_permission">
+            <column name="id" type="nvarchar(255)">
+                <constraints primaryKey="true" primaryKeyName="PK__users_permission"/>
+            </column>
+            <column name="version" type="bigint"/>
+            <column name="created_by" type="nvarchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="nvarchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="users_id" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="permission" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="users_permission" baseColumnNames="users_id" constraintName="users_permission_users" referencedTableName="users"  referencedColumnNames="id"/>
+    </changeSet>
+
 </databaseChangeLog>
