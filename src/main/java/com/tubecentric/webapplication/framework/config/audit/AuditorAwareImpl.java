@@ -1,5 +1,6 @@
 package com.tubecentric.webapplication.framework.config.audit;
 
+import com.tubecentric.webapplication.framework.security.service.ISessionUtilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.AuditorAware;
@@ -12,10 +13,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuditorAwareImpl implements AuditorAware<String> {
 
+    private final ISessionUtilService sessionUtilService;
+
     @Override
     public Optional<String> getCurrentAuditor() {
 
-        return Optional.of("SYSTEM");
+        String userId = Optional.ofNullable(sessionUtilService.getCurrentUserSub())
+                .orElse("SYSTEM");
+
+        return Optional.of(userId);
     }
 }
 
