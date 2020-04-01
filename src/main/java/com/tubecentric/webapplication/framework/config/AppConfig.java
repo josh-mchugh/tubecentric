@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class AppConfig {
 
     private YouTube youTube;
+    private JWT jwt;
 
     @Data
     public static class YouTube {
@@ -21,5 +22,15 @@ public class AppConfig {
 
         @NotBlank
         private String baseUrl;
+    }
+
+    @Data
+    public static class JWT {
+
+        @NotBlank
+        private Integer expiresInDays;
+
+        @NotBlank
+        private String key;
     }
 }
