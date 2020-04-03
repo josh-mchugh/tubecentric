@@ -11,18 +11,8 @@ import javax.validation.constraints.NotBlank;
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
 
-    private YouTube youTube;
     private JWT jwt;
-
-    @Data
-    public static class YouTube {
-
-        @NotBlank
-        private String key;
-
-        @NotBlank
-        private String baseUrl;
-    }
+    private YouTube youTube;
 
     @Data
     public static class JWT {
@@ -32,5 +22,15 @@ public class AppConfig {
 
         @NotBlank
         private String key;
+    }
+
+    @Data
+    public static class YouTube {
+
+        @NotBlank
+        private String key;
+
+        @NotBlank
+        private String baseUrl;
     }
 }
