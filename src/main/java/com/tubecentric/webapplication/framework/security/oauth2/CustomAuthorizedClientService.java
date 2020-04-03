@@ -1,5 +1,7 @@
 package com.tubecentric.webapplication.framework.security.oauth2;
 
+import com.tubecentric.webapplication.framework.security.google.GoogleRefreshTokenRequest;
+import com.tubecentric.webapplication.framework.security.google.GoogleRefreshTokenResponse;
 import com.tubecentric.webapplication.user.IUserAccessTokenService;
 import com.tubecentric.webapplication.user.entity.UserAccessTokenEntity;
 import com.tubecentric.webapplication.user.entity.UserAccessTokenScopeEntity;
@@ -13,6 +15,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.Instant;
 import java.util.Set;
@@ -33,8 +37,18 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
 
         UserAccessTokenEntity userAccessTokenEntity = userAccessTokenService.findBySub(principalName);
 
+        if(userAccessTokenEntity.getAccessTokenExpiresAt().isAfter(Instant.now())) {
+
+            OAuth2RefreshToken refreshToken = getRefreshToken(userAccessTokenEntity);
+            OAuth2AccessToken accessToken = getAccessToken(userAccessTokenEntity);
+
+            return (T) new OAuth2AuthorizedClient(clientRegistration, principalName, accessToken, refreshToken);
+        }
+
         OAuth2RefreshToken refreshToken = getRefreshToken(userAccessTokenEntity);
-        OAuth2AccessToken accessToken = getAccessToken(userAccessTokenEntity);
+        OAuth2AccessToken accessToken = getNewAccessToken(clientRegistration, userAccessTokenEntity);
+
+        userAccessTokenService.handleUpdateAccessToken(userAccessTokenEntity, accessToken);
 
         return (T) new OAuth2AuthorizedClient(clientRegistration, principalName, accessToken, refreshToken);
     }
@@ -65,11 +79,43 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
         String tokenValue = userAccessTokenEntity.getAccessTokenValue();
         Instant issuedAt = userAccessTokenEntity.getAccessTokenIssuedAt();
         Instant expiresAt = userAccessTokenEntity.getAccessTokenExpiresAt();
-
-        Set<String> scope = userAccessTokenEntity.getScopes().stream()
-                .map(UserAccessTokenScopeEntity::getScope)
-                .collect(Collectors.toSet());
+        Set<String> scope = getScopes(userAccessTokenEntity);
 
         return new OAuth2AccessToken(tokenType, tokenValue, issuedAt, expiresAt, scope);
+    }
+
+    private Set<String> getScopes(UserAccessTokenEntity userAccessTokenEntity) {
+
+        return userAccessTokenEntity.getScopes().stream()
+                .map(UserAccessTokenScopeEntity::getScope)
+                .collect(Collectors.toSet());
+    }
+
+    private OAuth2AccessToken getNewAccessToken(ClientRegistration clientRegistration, UserAccessTokenEntity userAccessTokenEntity) {
+
+        Instant issuedAt = Instant.now();
+
+        GoogleRefreshTokenRequest request = GoogleRefreshTokenRequest.builder()
+                .clientId(clientRegistration.getClientId())
+                .clientSecret(clientRegistration.getClientSecret())
+                .grantType("refresh_token")
+                .refreshToken(userAccessTokenEntity.getRefreshTokenValue())
+                .build();
+
+        GoogleRefreshTokenResponse response = getNewRefreshToken(request);
+
+        Instant expiresAt = issuedAt.plusSeconds(response.getExpiresIn());
+        Set<String> scopes = getScopes(userAccessTokenEntity);
+
+        return new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER, response.getAccessToken(), issuedAt, expiresAt, scopes);
+    }
+
+    private GoogleRefreshTokenResponse getNewRefreshToken(GoogleRefreshTokenRequest request) {
+
+        String url = UriComponentsBuilder.fromHttpUrl("https://www.googleapis.com/")
+                .path("/oauth2/v4/token")
+                .toUriString();
+
+        return new RestTemplate().postForObject(url, request, GoogleRefreshTokenResponse.class);
     }
 }

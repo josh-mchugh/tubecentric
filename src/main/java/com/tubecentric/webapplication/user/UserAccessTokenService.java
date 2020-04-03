@@ -68,6 +68,18 @@ public class UserAccessTokenService implements IUserAccessTokenService {
         entityManager.remove(userAccessTokenEntity);
     }
 
+    @Override
+    public UserAccessTokenEntity handleUpdateAccessToken(UserAccessTokenEntity userAccessTokenEntity, OAuth2AccessToken accessToken) {
+
+        userAccessTokenEntity.setAccessTokenValue(accessToken.getTokenValue());
+        userAccessTokenEntity.setAccessTokenIssuedAt(accessToken.getIssuedAt());
+        userAccessTokenEntity.setAccessTokenExpiresAt(accessToken.getExpiresAt());
+
+        entityManager.persist(userAccessTokenEntity);
+
+        return userAccessTokenEntity;
+    }
+
     private UserAccessTokenEntity create(Principal principal, OAuth2AuthorizedClient authorizedClient) {
 
         UserAccessTokenEntity accessTokenEntity = new UserAccessTokenEntity();

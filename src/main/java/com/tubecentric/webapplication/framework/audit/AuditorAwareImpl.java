@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.framework.config.audit;
+package com.tubecentric.webapplication.framework.audit;
 
 import com.tubecentric.webapplication.framework.security.service.ISessionUtilService;
 import lombok.RequiredArgsConstructor;
