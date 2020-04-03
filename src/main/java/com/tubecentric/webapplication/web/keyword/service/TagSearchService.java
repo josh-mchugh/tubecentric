@@ -2,7 +2,7 @@ package com.tubecentric.webapplication.web.keyword.service;
 
 import com.tubecentric.webapplication.framework.config.AppConfig;
 import com.tubecentric.webapplication.keyword.IKeywordSearchService;
-import com.tubecentric.webapplication.youtube.client.IYouTubeClient;
+import com.tubecentric.webapplication.youtube.client.YouTubeClient;
 import com.tubecentric.webapplication.youtube.client.model.SearchParams;
 import com.tubecentric.webapplication.youtube.client.model.VideoParams;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class TagSearchService implements ITagSearchService {
 
     private final AppConfig appConfig;
-    private final IYouTubeClient youTubeClient;
+    private final YouTubeClient youTubeClient;
     private final IKeywordSearchService keywordSearchService;
 
     @Override
