@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.framework.config.audit;
+package com.tubecentric.webapplication.framework.audit;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
