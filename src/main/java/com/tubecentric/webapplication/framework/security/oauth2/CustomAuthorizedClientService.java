@@ -2,9 +2,9 @@ package com.tubecentric.webapplication.framework.security.oauth2;
 
 import com.tubecentric.webapplication.framework.security.google.GoogleRefreshTokenRequest;
 import com.tubecentric.webapplication.framework.security.google.GoogleRefreshTokenResponse;
-import com.tubecentric.webapplication.user.IUserAccessTokenService;
-import com.tubecentric.webapplication.user.entity.UserAccessTokenEntity;
-import com.tubecentric.webapplication.user.entity.UserAccessTokenScopeEntity;
+import com.tubecentric.webapplication.user.model.UserAccessToken;
+import com.tubecentric.webapplication.user.service.IUserAccessTokenService;
+import com.tubecentric.webapplication.user.service.model.UserAccessTokenUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -20,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -35,28 +34,20 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
 
         ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId(clientRegistrationId);
 
-        UserAccessTokenEntity userAccessTokenEntity = userAccessTokenService.findBySub(principalName);
+        UserAccessToken userAccessToken = userAccessTokenService.findBySub(principalName);
 
-        if(userAccessTokenEntity.getAccessTokenExpiresAt().isAfter(Instant.now())) {
+        if(userAccessToken.getAccessTokenExpiresAt().isAfter(Instant.now())) {
 
-            OAuth2RefreshToken refreshToken = getRefreshToken(userAccessTokenEntity);
-            OAuth2AccessToken accessToken = getAccessToken(userAccessTokenEntity);
-
-            return (T) new OAuth2AuthorizedClient(clientRegistration, principalName, accessToken, refreshToken);
+            return loadOAuth2AuthorizedClient(clientRegistration, principalName, userAccessToken);
         }
 
-        OAuth2RefreshToken refreshToken = getRefreshToken(userAccessTokenEntity);
-        OAuth2AccessToken accessToken = getNewAccessToken(clientRegistration, userAccessTokenEntity);
-
-        userAccessTokenService.handleUpdateAccessToken(userAccessTokenEntity, accessToken);
-
-        return (T) new OAuth2AuthorizedClient(clientRegistration, principalName, accessToken, refreshToken);
+        return loadUpdatedOAuth2AuthorizedClient(clientRegistration, principalName, userAccessToken);
     }
 
     @Override
     public void saveAuthorizedClient(OAuth2AuthorizedClient authorizedClient, Authentication principal) {
 
-        userAccessTokenService.updateOrCreateAccessToken(principal, authorizedClient);
+        userAccessTokenService.updateOrCreateAccessToken(authorizedClient);
     }
 
     @Override
@@ -65,33 +56,49 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
         userAccessTokenService.deleteBySub(principalName);
     }
 
-    private OAuth2RefreshToken getRefreshToken(UserAccessTokenEntity userAccessTokenEntity) {
+    private <T extends OAuth2AuthorizedClient> T loadOAuth2AuthorizedClient(ClientRegistration clientRegistration, String principalName, UserAccessToken userAccessToken) {
 
-        String tokenValue = userAccessTokenEntity.getRefreshTokenValue();
-        Instant issuedAt = userAccessTokenEntity.getRefreshTokenIssuedAt();
+        OAuth2RefreshToken refreshToken = getRefreshToken(userAccessToken);
+        OAuth2AccessToken accessToken = getAccessToken(userAccessToken);
+
+        return (T) new OAuth2AuthorizedClient(clientRegistration, principalName, accessToken, refreshToken);
+    }
+
+    private <T extends OAuth2AuthorizedClient> T loadUpdatedOAuth2AuthorizedClient(ClientRegistration clientRegistration, String principalName, UserAccessToken userAccessToken) {
+
+        OAuth2RefreshToken refreshToken = getRefreshToken(userAccessToken);
+        OAuth2AccessToken accessToken = getNewAccessToken(clientRegistration, userAccessToken);
+
+        UserAccessTokenUpdateRequest request = UserAccessTokenUpdateRequest.builder()
+                .id(userAccessToken.getId())
+                .accessToken(accessToken)
+                .build();
+
+        userAccessTokenService.handleUpdateAccessToken(request);
+
+        return (T) new OAuth2AuthorizedClient(clientRegistration, principalName, accessToken, refreshToken);
+    }
+
+    private OAuth2RefreshToken getRefreshToken(UserAccessToken userAccessToken) {
+
+        String tokenValue = userAccessToken.getRefreshTokenValue();
+        Instant issuedAt = userAccessToken.getRefreshTokenIssuedAt();
 
         return new OAuth2RefreshToken(tokenValue, issuedAt);
     }
 
-    private OAuth2AccessToken getAccessToken(UserAccessTokenEntity userAccessTokenEntity) {
+    private OAuth2AccessToken getAccessToken(UserAccessToken userAccessToken) {
 
         OAuth2AccessToken.TokenType tokenType = OAuth2AccessToken.TokenType.BEARER;
-        String tokenValue = userAccessTokenEntity.getAccessTokenValue();
-        Instant issuedAt = userAccessTokenEntity.getAccessTokenIssuedAt();
-        Instant expiresAt = userAccessTokenEntity.getAccessTokenExpiresAt();
-        Set<String> scope = getScopes(userAccessTokenEntity);
+        String tokenValue = userAccessToken.getAccessTokenValue();
+        Instant issuedAt = userAccessToken.getAccessTokenIssuedAt();
+        Instant expiresAt = userAccessToken.getAccessTokenExpiresAt();
+        Set<String> scope = userAccessToken.getScopes();
 
         return new OAuth2AccessToken(tokenType, tokenValue, issuedAt, expiresAt, scope);
     }
 
-    private Set<String> getScopes(UserAccessTokenEntity userAccessTokenEntity) {
-
-        return userAccessTokenEntity.getScopes().stream()
-                .map(UserAccessTokenScopeEntity::getScope)
-                .collect(Collectors.toSet());
-    }
-
-    private OAuth2AccessToken getNewAccessToken(ClientRegistration clientRegistration, UserAccessTokenEntity userAccessTokenEntity) {
+    private OAuth2AccessToken getNewAccessToken(ClientRegistration clientRegistration, UserAccessToken userAccessToken) {
 
         Instant issuedAt = Instant.now();
 
@@ -99,13 +106,13 @@ public class CustomAuthorizedClientService implements OAuth2AuthorizedClientServ
                 .clientId(clientRegistration.getClientId())
                 .clientSecret(clientRegistration.getClientSecret())
                 .grantType("refresh_token")
-                .refreshToken(userAccessTokenEntity.getRefreshTokenValue())
+                .refreshToken(userAccessToken.getRefreshTokenValue())
                 .build();
 
         GoogleRefreshTokenResponse response = getNewRefreshToken(request);
 
         Instant expiresAt = issuedAt.plusSeconds(response.getExpiresIn());
-        Set<String> scopes = getScopes(userAccessTokenEntity);
+        Set<String> scopes = userAccessToken.getScopes();
 
         return new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER, response.getAccessToken(), issuedAt, expiresAt, scopes);
     }

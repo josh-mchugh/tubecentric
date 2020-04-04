@@ -1,27 +1,25 @@
-package com.tubecentric.webapplication.keyword;
+package com.tubecentric.webapplication.web.search;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.ImmutableSet;
 import com.tubecentric.webapplication.framework.module.IModule;
 import com.tubecentric.webapplication.user.entity.AccountType;
 import com.tubecentric.webapplication.user.entity.SubscriptionType;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
-
 @Component
-public class KeywordSearchModule implements IModule {
+public class RelatedTagsModule implements IModule {
 
     public enum Permission implements IModule.Permission {
 
-        ACCESS("KEYWORD_SEARCH_ACCESS", AccountType.CHANNEL_OWNER);
+        ACCESS("RELATED_TAGS_ACCESS", AccountType.CHANNEL_OWNER);
 
         private String value;
-        private Set<AccountType> accountTypes;
+        private ImmutableSet<AccountType> accountTypes;
 
         Permission(String value, AccountType... accountTypes) {
 
             this.value = value;
-            this.accountTypes = Sets.newHashSet(accountTypes);
+            this.accountTypes = ImmutableSet.copyOf(accountTypes);
         }
 
         @Override
@@ -31,7 +29,7 @@ public class KeywordSearchModule implements IModule {
         }
 
         @Override
-        public Set<AccountType> accountTypes() {
+        public ImmutableSet<AccountType> accountTypes() {
 
             return accountTypes;
         }
@@ -44,14 +42,14 @@ public class KeywordSearchModule implements IModule {
     }
 
     @Override
-    public Set<IModule.Permission> permissions() {
+    public ImmutableSet<IModule.Permission> permissions() {
 
-        return Sets.newHashSet(Permission.values());
+        return ImmutableSet.copyOf(Permission.values());
     }
 
     @Override
-    public Set<SubscriptionType> subscriptionTypes() {
+    public ImmutableSet<SubscriptionType> subscriptionTypes() {
 
-        return Sets.newHashSet(SubscriptionType.FREE);
+        return ImmutableSet.of(SubscriptionType.FREE);
     }
 }

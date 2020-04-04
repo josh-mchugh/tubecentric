@@ -17,11 +17,20 @@ public class AppConfig {
     @Data
     public static class JWT {
 
+        private Cookie cookie;
+
         @NotBlank
         private Integer expiresInDays;
 
         @NotBlank
         private String key;
+
+        @Data
+        public static class Cookie {
+
+            private boolean httpOnly;
+            private boolean secure;
+        }
     }
 
     @Data

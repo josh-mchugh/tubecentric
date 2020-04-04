@@ -1,6 +1,9 @@
 package com.tubecentric.webapplication.framework.security.oauth2;
 
+import com.tubecentric.webapplication.framework.config.AppConfig;
 import com.tubecentric.webapplication.framework.security.cookie.CookieUtils;
+import com.tubecentric.webapplication.framework.security.cookie.model.CookieAddRequest;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
@@ -12,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Base64;
 
 @Component
+@RequiredArgsConstructor
 public class CustomAuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
+
+    private final AppConfig appConfig;
 
     @Override
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
@@ -34,8 +40,16 @@ public class CustomAuthorizationRequestRepository implements AuthorizationReques
             return;
         }
 
-        String serializedRequest = Base64.getUrlEncoder().encodeToString(SerializationUtils.serialize(authorizationRequest));
-        CookieUtils.addCookie(response, CookieUtils.AUTHORIZATION_REQUEST_COOKIE_NAME, serializedRequest, 180);
+        CookieAddRequest addRequest = CookieAddRequest.builder()
+                .response(response)
+                .name(CookieUtils.AUTHORIZATION_REQUEST_COOKIE_NAME)
+                .value(Base64.getUrlEncoder().encodeToString(SerializationUtils.serialize(authorizationRequest)))
+                .expiry(180)
+                .httpOnly(appConfig.getJwt().getCookie().isHttpOnly())
+                .secure(appConfig.getJwt().getCookie().isSecure())
+                .build();
+
+        CookieUtils.addCookie(addRequest);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.tubecentric.webapplication.framework.security.jwt;
 
 import com.tubecentric.webapplication.framework.security.cookie.CookieUtils;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
@@ -32,7 +30,10 @@ public class JWTFilter extends OncePerRequestFilter {
 
             Authentication authentication = tokenProvider.getAuthentication(jwt);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if(authentication != null) {
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
 
         chain.doFilter(request, response);

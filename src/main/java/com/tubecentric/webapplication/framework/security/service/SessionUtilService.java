@@ -1,11 +1,14 @@
 package com.tubecentric.webapplication.framework.security.service;
 
-import com.tubecentric.webapplication.user.IUserService;
-import com.tubecentric.webapplication.user.entity.UserEntity;
+import com.tubecentric.webapplication.user.model.User;
+import com.tubecentric.webapplication.user.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
+
+import java.security.Principal;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -16,24 +19,17 @@ public class SessionUtilService implements ISessionUtilService {
     @Override
     public String getCurrentUserSub() {
 
-        if(SecurityContextHolder.getContext().getAuthentication() != null) {
-
-            return SecurityContextHolder.getContext().getAuthentication().getName();
-        }
-
-        return null;
+        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+                .map(Principal::getName)
+                .orElse(null);
     }
 
     @Override
-    public UserEntity getCurrentUser() {
+    public User getCurrentUser() {
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if(principal instanceof OAuth2User) {
-
-            return userService.findBySub(((OAuth2User) principal).getName());
-        }
-
-        return null;
+        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+                .filter(principal -> principal instanceof OAuth2User)
+                .map(authentication -> userService.findBySub(authentication.getName()))
+                .orElse(null);
     }
 }

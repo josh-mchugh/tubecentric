@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.user.model;
+package com.tubecentric.webapplication.user.service.model;
 
 import lombok.Builder;
 import lombok.Value;

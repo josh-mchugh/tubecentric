@@ -1,6 +1,6 @@
 package com.tubecentric.webapplication.framework.security.oauth2;
 
-import com.tubecentric.webapplication.user.IUserService;
+import com.tubecentric.webapplication.user.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
