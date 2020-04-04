@@ -48,7 +48,7 @@ public class LandingController {
             return "fragments/partial-subscribe-section";
         }
 
-        subscriberService.handleSubscriberSave(form.getEmail());
+        subscriberService.persistSubscriber(form.getEmail());
 
         return "fragments/partial-subscribe-success-section";
     }

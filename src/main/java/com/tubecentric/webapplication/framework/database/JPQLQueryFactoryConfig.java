@@ -17,6 +17,6 @@ public class JPQLQueryFactoryConfig {
     @Bean
     public JPQLQueryFactory jpqlQueryFactory() {
 
-        return new JPAQueryFactory(this.entityManager);
+        return new JPAQueryFactory(entityManager);
     }
 }

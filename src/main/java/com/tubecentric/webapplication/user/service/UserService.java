@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.user;
+package com.tubecentric.webapplication.user.service;
 
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.tubecentric.webapplication.framework.module.IModuleService;
@@ -7,7 +7,9 @@ import com.tubecentric.webapplication.user.entity.QUserEntity;
 import com.tubecentric.webapplication.user.entity.SubscriptionType;
 import com.tubecentric.webapplication.user.entity.UserEntity;
 import com.tubecentric.webapplication.user.entity.UserPermissionEntity;
-import com.tubecentric.webapplication.user.model.AuthenticationResponse;
+import com.tubecentric.webapplication.user.mapper.UserMapper;
+import com.tubecentric.webapplication.user.model.User;
+import com.tubecentric.webapplication.user.service.model.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,20 +25,26 @@ import java.util.stream.Collectors;
 @Component
 @Transactional
 @RequiredArgsConstructor
-public class UserService implements IUserService{
+public class UserService implements IUserService, IUserEntityService{
 
     private final IModuleService moduleService;
     private final JPQLQueryFactory queryFactory;
     private final EntityManager entityManager;
 
     @Override
-    public UserEntity findBySub(String sub) {
+    public UserEntity getBySub(String sub) {
 
         QUserEntity qUserEntity = QUserEntity.userEntity;
 
         return queryFactory.selectFrom(qUserEntity)
                 .where(qUserEntity.sub.eq(sub))
                 .fetchOne();
+    }
+
+    @Override
+    public User findBySub(String sub) {
+
+        return UserMapper.map(getBySub(sub));
     }
 
     @Override
@@ -53,20 +61,20 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public UserEntity updateOrCreateUser(OidcUser oidcUser) {
+    public User updateOrCreateUser(OidcUser oidcUser) {
 
         if(existsBySub(oidcUser.getSubject())) {
 
-            return update(oidcUser);
+            return UserMapper.map(update(oidcUser));
         }
 
-        return create(oidcUser);
+        return UserMapper.map(create(oidcUser));
     }
 
     @Override
     public AuthenticationResponse handleAuthenticationRequest(String sub) {
 
-        UserEntity userEntity = findBySub(sub);
+        UserEntity userEntity = getBySub(sub);
 
         Map<String, Object> attributes = new HashedMap<>();
         attributes.put("sub", userEntity.getSub());
@@ -88,8 +96,7 @@ public class UserService implements IUserService{
 
     private UserEntity update(OidcUser oidcUser) {
 
-
-        UserEntity userEntity = findBySub(oidcUser.getSubject());
+        UserEntity userEntity = getBySub(oidcUser.getSubject());
 
         userEntity.setName(oidcUser.getFullName());
         userEntity.setEmail(oidcUser.getEmail());

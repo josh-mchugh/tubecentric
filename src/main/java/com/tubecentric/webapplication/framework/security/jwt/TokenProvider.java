@@ -1,8 +1,8 @@
 package com.tubecentric.webapplication.framework.security.jwt;
 
 import com.tubecentric.webapplication.framework.config.AppConfig;
-import com.tubecentric.webapplication.user.IUserService;
-import com.tubecentric.webapplication.user.model.AuthenticationResponse;
+import com.tubecentric.webapplication.user.service.IUserService;
+import com.tubecentric.webapplication.user.service.model.AuthenticationResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.JwtParser;
@@ -69,11 +69,16 @@ public class TokenProvider {
         Claims claims = jwtParser.parseClaimsJws(token)
                 .getBody();
 
-        AuthenticationResponse response = userService.handleAuthenticationRequest(claims.getSubject());
+        if(userService.existsBySub(claims.getSubject())) {
 
-        OAuth2User principle = new DefaultOAuth2User(response.getAuthorities(), response.getAttributes(), "sub");
+            AuthenticationResponse response = userService.handleAuthenticationRequest(claims.getSubject());
 
-        return new OAuth2AuthenticationToken(principle, response.getAuthorities(), "google");
+            OAuth2User principle = new DefaultOAuth2User(response.getAuthorities(), response.getAttributes(), "sub");
+
+            return new OAuth2AuthenticationToken(principle, response.getAuthorities(), "google");
+        }
+
+        return null;
     }
 
     public boolean validateToken(String token) {

@@ -1,4 +1,4 @@
-package com.tubecentric.webapplication.keyword.entity;
+package com.tubecentric.webapplication.metric.entity;
 
 import com.tubecentric.webapplication.framework.database.AbstractEntity;
 import lombok.Getter;
@@ -16,10 +16,10 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @ToString
-@Table(name="keyword_search_term_entry")
-public class KeywordSearchTermEntry extends AbstractEntity {
+@Table(name = "metric_related_tag_query_entry")
+public class MetricRelatedTagsQueryEntryEntity extends AbstractEntity {
 
-    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST}, fetch= FetchType.LAZY)
-    @JoinColumn(name="keyword_search_term_id")
-    public KeywordSearchTerm keywordSearchTerm;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "metric_related_tag_query_id")
+    public MetricRelatedTagsQueryEntity relatedTagsQuery;
 }

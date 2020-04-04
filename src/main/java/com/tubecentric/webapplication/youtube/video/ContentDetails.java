@@ -19,8 +19,11 @@ public class ContentDetails {
     private String caption;
 
     @JsonProperty("licensedContent")
-    private boolean licensedContent;
+    private Boolean licensedContent;
 
     @JsonProperty("projection")
     private String projection;
+
+    @JsonProperty("hasCustomThumbnail")
+    private Boolean customThumbnail;
 }

@@ -7,17 +7,17 @@ import lombok.Data;
 public class Thumbnails {
 
     @JsonProperty("default")
-    private Default _default;
+    private Thumbnail _default;
 
     @JsonProperty("medium")
-    private Medium medium;
+    private Thumbnail medium;
 
     @JsonProperty("high")
-    private High high;
+    private Thumbnail high;
 
     @JsonProperty("standard")
-    private Standard standard;
+    private Thumbnail standard;
 
     @JsonProperty("maxres")
-    private Max maxres;
+    private Thumbnail max;
 }
