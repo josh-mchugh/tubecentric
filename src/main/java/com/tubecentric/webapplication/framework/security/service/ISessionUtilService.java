@@ -1,10 +1,10 @@
 package com.tubecentric.webapplication.framework.security.service;
 
-import com.tubecentric.webapplication.user.entity.UserEntity;
+import com.tubecentric.webapplication.user.model.User;
 
 public interface ISessionUtilService {
 
     String getCurrentUserSub();
 
-    UserEntity getCurrentUser();
+    User getCurrentUser();
 }

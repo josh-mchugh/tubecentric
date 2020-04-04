@@ -18,7 +18,7 @@ public class SubscriberService implements ISubscriberService {
     private final EntityManager entityManager;
 
     @Override
-    public void handleSubscriberSave(String email) {
+    public void persistSubscriber(String email) {
 
         if (!existSubscriber(email)) {
 

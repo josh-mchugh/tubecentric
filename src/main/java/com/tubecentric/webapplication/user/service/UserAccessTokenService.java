@@ -1,9 +1,12 @@
-package com.tubecentric.webapplication.user;
+package com.tubecentric.webapplication.user.service;
 
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.tubecentric.webapplication.user.entity.QUserAccessTokenEntity;
 import com.tubecentric.webapplication.user.entity.UserAccessTokenEntity;
 import com.tubecentric.webapplication.user.entity.UserAccessTokenScopeEntity;
+import com.tubecentric.webapplication.user.mapper.UserAccessTokenMapper;
+import com.tubecentric.webapplication.user.model.UserAccessToken;
+import com.tubecentric.webapplication.user.service.model.UserAccessTokenUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -12,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.security.Principal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,18 +24,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserAccessTokenService implements IUserAccessTokenService {
 
-    private final IUserService userService;
+    private final IUserEntityService userEntityService;
     private final JPQLQueryFactory queryFactory;
     private final EntityManager entityManager;
 
     @Override
-    public UserAccessTokenEntity findBySub(String sub) {
+    public UserAccessToken findBySub(String sub) {
 
-        QUserAccessTokenEntity qUserAccessTokenEntity = QUserAccessTokenEntity.userAccessTokenEntity;
-
-        return queryFactory.selectFrom(qUserAccessTokenEntity)
-                .where(qUserAccessTokenEntity.user.sub.eq(sub))
-                .fetchOne();
+        return UserAccessTokenMapper.map(getBySub(sub));
     }
 
     @Override
@@ -50,40 +48,58 @@ public class UserAccessTokenService implements IUserAccessTokenService {
     }
 
     @Override
-    public UserAccessTokenEntity updateOrCreateAccessToken(Principal principal, OAuth2AuthorizedClient authorizedClient) {
+    public UserAccessToken updateOrCreateAccessToken(OAuth2AuthorizedClient authorizedClient) {
 
-        if(existsBySub(principal.getName())) {
+        if(existsBySub(authorizedClient.getPrincipalName())) {
 
-            return update(principal, authorizedClient);
+            return UserAccessTokenMapper.map(update(authorizedClient));
         }
 
-        return create(principal, authorizedClient);
+        return UserAccessTokenMapper.map(create(authorizedClient));
     }
 
     @Override
     public void deleteBySub(String sub) {
 
-        UserAccessTokenEntity userAccessTokenEntity = findBySub(sub);
-
-        entityManager.remove(userAccessTokenEntity);
+        entityManager.remove(getBySub(sub));
     }
 
     @Override
-    public UserAccessTokenEntity handleUpdateAccessToken(UserAccessTokenEntity userAccessTokenEntity, OAuth2AccessToken accessToken) {
+    public UserAccessToken handleUpdateAccessToken(UserAccessTokenUpdateRequest request) {
 
-        userAccessTokenEntity.setAccessTokenValue(accessToken.getTokenValue());
-        userAccessTokenEntity.setAccessTokenIssuedAt(accessToken.getIssuedAt());
-        userAccessTokenEntity.setAccessTokenExpiresAt(accessToken.getExpiresAt());
+        UserAccessTokenEntity userAccessTokenEntity = getById(request.getId());
+
+        userAccessTokenEntity.setAccessTokenValue(request.getAccessToken().getTokenValue());
+        userAccessTokenEntity.setAccessTokenIssuedAt(request.getAccessToken().getIssuedAt());
+        userAccessTokenEntity.setAccessTokenExpiresAt(request.getAccessToken().getExpiresAt());
 
         entityManager.persist(userAccessTokenEntity);
 
-        return userAccessTokenEntity;
+        return UserAccessTokenMapper.map(userAccessTokenEntity);
     }
 
-    private UserAccessTokenEntity create(Principal principal, OAuth2AuthorizedClient authorizedClient) {
+    private UserAccessTokenEntity getById(String id) {
+
+        QUserAccessTokenEntity qUserAccessToken = QUserAccessTokenEntity.userAccessTokenEntity;
+
+        return queryFactory.selectFrom(qUserAccessToken)
+                .where(qUserAccessToken.id.eq(id))
+                .fetchOne();
+    }
+
+    private UserAccessTokenEntity getBySub(String sub) {
+
+        QUserAccessTokenEntity qUserAccessToken = QUserAccessTokenEntity.userAccessTokenEntity;
+
+        return queryFactory.selectFrom(qUserAccessToken)
+                .where(qUserAccessToken.user.sub.eq(sub))
+                .fetchOne();
+    }
+
+    private UserAccessTokenEntity create(OAuth2AuthorizedClient authorizedClient) {
 
         UserAccessTokenEntity accessTokenEntity = new UserAccessTokenEntity();
-        accessTokenEntity.setUser(userService.findBySub(principal.getName()));
+        accessTokenEntity.setUser(userEntityService.getBySub(authorizedClient.getPrincipalName()));
         accessTokenEntity.setRefreshTokenValue(authorizedClient.getRefreshToken().getTokenValue());
         accessTokenEntity.setRefreshTokenIssuedAt(authorizedClient.getRefreshToken().getIssuedAt());
         accessTokenEntity.setAccessTokenType(authorizedClient.getAccessToken().getTokenType().getValue());
@@ -98,9 +114,9 @@ public class UserAccessTokenService implements IUserAccessTokenService {
         return accessTokenEntity;
     }
 
-    private UserAccessTokenEntity update(Principal principal, OAuth2AuthorizedClient authorizedClient) {
+    private UserAccessTokenEntity update(OAuth2AuthorizedClient authorizedClient) {
 
-        UserAccessTokenEntity accessTokenEntity = findBySub(principal.getName());
+        UserAccessTokenEntity accessTokenEntity = getBySub(authorizedClient.getPrincipalName());
         accessTokenEntity.setRefreshTokenValue(authorizedClient.getRefreshToken().getTokenValue());
         accessTokenEntity.setRefreshTokenIssuedAt(authorizedClient.getRefreshToken().getIssuedAt());
         accessTokenEntity.setAccessTokenType(authorizedClient.getAccessToken().getTokenType().getValue());

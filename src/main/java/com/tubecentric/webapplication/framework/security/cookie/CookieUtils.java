@@ -1,5 +1,6 @@
 package com.tubecentric.webapplication.framework.security.cookie;
 
+import com.tubecentric.webapplication.framework.security.cookie.model.CookieAddRequest;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
@@ -17,15 +18,15 @@ public class CookieUtils {
         return Optional.ofNullable(WebUtils.getCookie(request, name));
     }
 
-    public static void addCookie(HttpServletResponse response, String name, String value, Integer expiry) {
+    public static void addCookie(CookieAddRequest request) {
 
-        Cookie cookie = new Cookie(name, value);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(false);
-        cookie.setMaxAge(expiry);
+        Cookie cookie = new Cookie(request.getName(), request.getValue());
+        cookie.setPath(request.getPath());
+        cookie.setHttpOnly(request.isHttpOnly());
+        cookie.setSecure(request.isSecure());
+        cookie.setMaxAge(request.getExpiry());
 
-        response.addCookie(cookie);
+        request.getResponse().addCookie(cookie);
     }
 
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {

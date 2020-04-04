@@ -8,6 +8,9 @@ import java.util.List;
 @Data
 public class TopicDetails {
 
+    @JsonProperty("topicIds")
+    private List<String> topicIds;
+
     @JsonProperty("relevantTopicIds")
     private List<String> relevantTopicIds;
 

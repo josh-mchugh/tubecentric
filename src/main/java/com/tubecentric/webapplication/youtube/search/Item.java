@@ -6,12 +6,6 @@ import lombok.Data;
 @Data
 public class Item {
 
-    @JsonProperty("kind")
-    private String kind;
-
-    @JsonProperty("etag")
-    private String etag;
-
     @JsonProperty("id")
     private Id id;
 

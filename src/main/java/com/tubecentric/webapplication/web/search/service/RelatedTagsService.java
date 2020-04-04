@@ -1,7 +1,7 @@
-package com.tubecentric.webapplication.web.keyword.service;
+package com.tubecentric.webapplication.web.search.service;
 
 import com.tubecentric.webapplication.framework.config.AppConfig;
-import com.tubecentric.webapplication.keyword.IKeywordSearchService;
+import com.tubecentric.webapplication.metric.IMetricRelatedTagsService;
 import com.tubecentric.webapplication.youtube.client.YouTubeClient;
 import com.tubecentric.webapplication.youtube.client.model.SearchParams;
 import com.tubecentric.webapplication.youtube.client.model.VideoParams;
@@ -16,16 +16,16 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class TagSearchService implements ITagSearchService {
+public class RelatedTagsService implements IRelatedTagsService {
 
     private final AppConfig appConfig;
     private final YouTubeClient youTubeClient;
-    private final IKeywordSearchService keywordSearchService;
+    private final IMetricRelatedTagsService metricRelatedTagsService;
 
     @Override
-    public List<ExtractedResult> getSearchTags(String query) {
+    public List<ExtractedResult> getRelatedTags(String query) {
 
-        keywordSearchService.addKeywordSearchTerm(query);
+        metricRelatedTagsService.persistRelatedTagsQuery(query);
 
         SearchParams searchParams = SearchParams.builder()
                 .q(query)

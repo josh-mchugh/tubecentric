@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class Standard {
+public class Thumbnail {
 
     @JsonProperty("url")
     private String url;

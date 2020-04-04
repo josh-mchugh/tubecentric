@@ -2,6 +2,7 @@ package com.tubecentric.webapplication.framework.security.oauth2;
 
 import com.tubecentric.webapplication.framework.config.AppConfig;
 import com.tubecentric.webapplication.framework.security.cookie.CookieUtils;
+import com.tubecentric.webapplication.framework.security.cookie.model.CookieAddRequest;
 import com.tubecentric.webapplication.framework.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -61,9 +62,15 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
 
     private void addJwtTokenCookie(HttpServletResponse response, Authentication authentication) {
 
-        String jwtToken = tokenProvider.createToken(authentication);
-        Integer expiry = (int) TimeUnit.DAYS.toSeconds(appConfig.getJwt().getExpiresInDays());
+        CookieAddRequest request = CookieAddRequest.builder()
+                .response(response)
+                .name(CookieUtils.JWT_COOKIE_NAME)
+                .value(tokenProvider.createToken(authentication))
+                .expiry((int) TimeUnit.DAYS.toSeconds(appConfig.getJwt().getExpiresInDays()))
+                .httpOnly(appConfig.getJwt().getCookie().isHttpOnly())
+                .secure(appConfig.getJwt().getCookie().isSecure())
+                .build();
 
-        CookieUtils.addCookie(response, CookieUtils.JWT_COOKIE_NAME, jwtToken, expiry);
+        CookieUtils.addCookie(request);
     }
 }

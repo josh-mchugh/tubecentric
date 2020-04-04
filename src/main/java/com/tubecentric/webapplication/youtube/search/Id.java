@@ -14,4 +14,7 @@ public class Id {
 
     @JsonProperty("channelId")
     private String channelId;
+
+    @JsonProperty("playlistId")
+    private String playlistId;
 }
