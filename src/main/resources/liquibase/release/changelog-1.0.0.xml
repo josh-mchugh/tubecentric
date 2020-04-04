@@ -223,4 +223,10 @@
         <addForeignKeyConstraint baseTableName="users_permission" baseColumnNames="users_id" constraintName="users_permission_users" referencedTableName="users"  referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="3" author="jmchugh">
+        <renameTable newTableName="metric_related_tag_query" oldTableName="keyword_search_term"/>
+        <renameTable newTableName="metric_related_tag_query_entry" oldTableName="keyword_search_term_entry"/>
+        <renameColumn newColumnName="metric_related_tag_query_id" oldColumnName="keyword_search_term_id" tableName="metric_related_tag_query_entry"/>
+    </changeSet>
+
 </databaseChangeLog>

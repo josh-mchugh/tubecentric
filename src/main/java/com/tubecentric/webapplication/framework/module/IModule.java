@@ -1,9 +1,8 @@
 package com.tubecentric.webapplication.framework.module;
 
+import com.google.common.collect.ImmutableSet;
 import com.tubecentric.webapplication.user.entity.AccountType;
 import com.tubecentric.webapplication.user.entity.SubscriptionType;
-
-import java.util.Set;
 
 public interface IModule {
 
@@ -11,12 +10,12 @@ public interface IModule {
 
         String value();
 
-        Set<AccountType> accountTypes();
+        ImmutableSet<AccountType> accountTypes();
     }
 
     String name();
 
-    Set<IModule.Permission> permissions();
+    ImmutableSet<Permission> permissions();
 
-    Set<SubscriptionType> subscriptionTypes();
+    ImmutableSet<SubscriptionType> subscriptionTypes();
 }

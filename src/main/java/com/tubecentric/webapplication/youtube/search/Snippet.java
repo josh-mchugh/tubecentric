@@ -3,10 +3,12 @@ package com.tubecentric.webapplication.youtube.search;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tubecentric.webapplication.youtube.thumbnail.Thumbnails;
 
+import java.time.LocalDateTime;
+
 public class Snippet {
 
     @JsonProperty("publishedAt")
-    private String publishedAt;
+    private LocalDateTime publishedAt;
 
     @JsonProperty("channelId")
     private String channelId;
